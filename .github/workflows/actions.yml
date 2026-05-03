@@ -1,0 +1,58 @@
+name: Ruby Book CI
+
+on:
+  pull_request:
+    branches:
+     - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  rubocop:
+    name: RuboCop
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with: 
+          ruby-version: "4.0.1"
+          bundler-cache: true
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+  rspec:
+    name: Rspec and Codecov
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "4.0.1"
+        bundler-cache: true
+
+    - name: Run RSpec
+      run: bundle exec rspec
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v5
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      with:
+        files: coverage/coverage.xml
+        flags: ruby
+        name: ruby-rspec
+        fail-ci-if-error: true
+
