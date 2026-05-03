@@ -41,7 +41,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "4.0.1"
-        bundle-cache: true
+        bundler-cache: true
 
     - name: Run RSpec
       run: bundle exec rspec
