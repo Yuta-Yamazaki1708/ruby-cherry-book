@@ -51,7 +51,7 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
-        files: codecov/coverage.xml
+        files: coverage/coverage.xml
         flags: ruby
         name: ruby-rspec
         fail-ci-if-error: true
