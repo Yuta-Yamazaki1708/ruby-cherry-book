@@ -1,0 +1,9 @@
+plugins:
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+
+RSpec/ContextWording:
+  Enabled: false
