@@ -10,10 +10,9 @@ class RGB
 
   def to_int(str)
     validate_string(str)
-    parsed = parse_string(str)
-    validate_color_code(parsed)
+    validate_color_code(str)
 
-    parsed[1].scan(/.{2}/).map(&:hex)
+    str[1..].scan(/.{2}/).map(&:hex)
   end
 
   private
@@ -23,23 +22,18 @@ class RGB
               ary.size == 3 &&
               ary.all? { |n| n.is_a?(Integer) && HEX_RANGE.cover?(n) }
 
-    raise ArgumentError, 'Invalid Error: 3要素ある配列で、全ての要素が0から255の整数である必要があります'
+    raise ArgumentError, 'Invalid Argument: 3要素ある配列で、全ての要素が0から255の整数である必要があります'
   end
 
   def validate_string(str)
     return if str.is_a?(String)
 
-    raise ArgumentError, 'Invalid Error: 文字列である必要があります'
+    raise ArgumentError, 'Invalid Argument: 文字列である必要があります'
   end
 
-  def validate_color_code(parsed)
-    return if parsed[0] == '#' &&
-              /\A[0-9a-f]{6}\z/.match?(parsed[1])
+  def validate_color_code(str)
+    return if /\A#[0-9a-fA-F]{6}\z/.match?(str)
 
-    raise ArgumentError, 'Invalid Error: 1文字目が#かつ6桁の16進数の文字列である必要があります'
-  end
-
-  def parse_string(str)
-    [str[0], str[1..]]
+    raise ArgumentError, 'Invalid Argument: 1文字目が#かつ6桁の16進数の文字列である必要があります'
   end
 end
