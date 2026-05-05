@@ -37,19 +37,19 @@ RSpec.describe RGB do
 
   describe 'validate_arrayメソッド' do
     context '配列でなかった場合' do
-      it 'Argument Errorが返ること' do
+      it 'ArgumentErrorが返ること' do
         expect { rgb.to_hex('test') }.to raise_error(ArgumentError)
       end
     end
 
     context '要素数が3でなかった場合' do
-      it 'Argument Errorが返ること' do
-        expect { rgb.to_hex(Array(5)) }.to raise_error(ArgumentError)
+      it 'ArgumentErrorが返ること' do
+        expect { rgb.to_hex([0, 0]) }.to raise_error(ArgumentError)
       end
     end
 
     context '全ての要素が0から255の整数でなかった場合' do
-      it 'Argument Errorが返ること' do
+      it 'ArgumentErrorが返ること' do
         expect { rgb.to_hex([0, 300, 255]) }.to raise_error(ArgumentError)
       end
     end
@@ -57,7 +57,7 @@ RSpec.describe RGB do
 
   describe 'validate_stringメソッド' do
     context '文字列でなかった場合' do
-      it 'Argument Errorが返ること' do
+      it 'ArgumentErrorが返ること' do
         expect { rgb.to_int(123) }.to raise_error(ArgumentError)
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe RGB do
 
   describe 'validate_color_codeメソッド' do
     context '正規表現にマッチしなかった場合' do
-      it 'Argument Errorが返ること' do
+      it 'ArgumentErrorが返ること' do
         expect { rgb.to_int('#hogehoge') }.to raise_error(ArgumentError)
       end
     end

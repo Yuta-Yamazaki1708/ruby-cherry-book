@@ -1,7 +1,9 @@
-HEX_RANGE = (0..255).freeze
+# frozen_string_literal: true
 
 # １０進数を16進数カラーコードに変換するインスタンスメソッドと、その逆インスタンスメソッドを持つ
 class RGB
+  HEX_RANGE = (0..255).freeze
+  private_constant :HEX_RANGE
   def to_hex(ary)
     validate_array(ary)
 
